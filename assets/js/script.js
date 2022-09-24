@@ -41,7 +41,7 @@ searchBtn.addEventListener("click", async function (event) {
       console.log(requestUrl);
       currentCity.textContent = data.name + " (" + currentDate + ")";
 
-      // Adds icon
+      // Adds icon to current daily forecast
       currentIcon.setAttribute(
         "src",
         " http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
@@ -51,7 +51,7 @@ searchBtn.addEventListener("click", async function (event) {
       currentHumidity.textContent = "Humidity: " + data.main.humidity + " %";
     })
     .catch(function (error) {
-      alert("error");
+      alert("Please enter a valid city name");
     });
 
   // Five day forecast URL
@@ -66,27 +66,28 @@ searchBtn.addEventListener("click", async function (event) {
 
   // var fiveDayForecast = document.getElementById("five-day-forecast");
 
+  //Five day icon information
+  // var fiveDayIcon = document.getElementsByClassName("five-day-icon");
+
+  var fiveDayIconDisplay = document.getElementsByClassName(
+    "five-day-icon-display"
+  );
+
+  // Five day temp information
+  var fiveDayTemp = document.getElementsByClassName("five-day-temp");
+
+  // Five day wind information
+  var fiveDayWind = document.getElementsByClassName("five-day-wind");
+
+  // Five day humidity information
+  var fiveDayHumidity = document.getElementsByClassName("five-day-humidity");
+
   fetch(fiveDayForecastUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-
-      //Five day icon information
-      var fiveDayIcon = document.getElementsByClassName("five-day-icon");
-
-      console.log(data.list[0].weather.icon);
-
-      // Five day temp information
-      var fiveDayTemp = document.getElementsByClassName("five-day-temp");
-
-      // Five day wind information
-      var fiveDayWind = document.getElementsByClassName("five-day-wind");
-
-      // Five day humidity information
-      var fiveDayHumidity =
-        document.getElementsByClassName("five-day-humidity");
 
       // Displays five day forecast data
       // j = 6 because this starts at the next day data. when [0], sometimes it stays on the previous/current day
@@ -96,7 +97,14 @@ searchBtn.addEventListener("click", async function (event) {
 
         // Redo this so that it sets the attribute src = "website source", and grabs icon for j
 
-        fiveDayIcon[i].textContent = data.list[j].weather[0].icon;
+        fiveDayIconDisplay[i].setAttribute(
+          "src",
+          "http://openweathermap.org/img/wn/" +
+            data.list[j].weather[0].icon +
+            ".png"
+        );
+
+        // fiveDayIcon[i].textContent = data.list[j].weather[0].icon;
         fiveDayTemp[i].textContent = "Temp: " + data.list[j].main.temp + "°F";
         fiveDayWind[i].textContent =
           "Wind: " + data.list[j].wind.speed + " MPH";
