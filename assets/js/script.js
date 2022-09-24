@@ -3,6 +3,7 @@ var APIKey = "c760641df731ec398ea17ddbcb746b34";
 
 // Current weather forecast
 var currentCity = document.getElementById("current-city");
+var currentIcon = document.getElementById("current-icon");
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
@@ -38,9 +39,13 @@ searchBtn.addEventListener("click", async function (event) {
     .then(function (data) {
       console.log(data);
       console.log(requestUrl);
-      currentCity.textContent =
-        data.name + " " + data.weather[0].icon + " (" + currentDate + ")";
+      currentCity.textContent = data.name + " (" + currentDate + ")";
 
+      // Adds icon
+      currentIcon.setAttribute(
+        "src",
+        " http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
+      );
       currentTemp.textContent = "Temp: " + data.main.temp + "°F";
       currentWind.textContent = "Wind: " + data.wind.speed + " MPH";
       currentHumidity.textContent = "Humidity: " + data.main.humidity + " %";
@@ -88,6 +93,9 @@ searchBtn.addEventListener("click", async function (event) {
       for (var i = 0, j = 6; i < 5, j < data.list.length; i++, j += 8) {
         console.log(data.list[j].dt_txt);
         console.log(fiveDayTemp[i]);
+
+        // Redo this so that it sets the attribute src = "website source", and grabs icon for j
+
         fiveDayIcon[i].textContent = data.list[j].weather[0].icon;
         fiveDayTemp[i].textContent = "Temp: " + data.list[j].main.temp + "°F";
         fiveDayWind[i].textContent =
