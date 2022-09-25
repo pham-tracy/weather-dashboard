@@ -1,12 +1,23 @@
 // API key for Weather API
 var APIKey = "c760641df731ec398ea17ddbcb746b34";
 
-// Current weather forecast
+// Current weather forecast elements
 var currentCity = document.getElementById("current-city");
 var currentIcon = document.getElementById("current-icon");
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
+
+// Five-day weather forecast elements
+var fiveDayIconDisplay = document.getElementsByClassName(
+  "five-day-icon-display"
+);
+var fiveDayIconDisplay = document.getElementsByClassName(
+  "five-day-icon-display"
+);
+var fiveDayTemp = document.getElementsByClassName("five-day-temp");
+var fiveDayWind = document.getElementsByClassName("five-day-wind");
+var fiveDayHumidity = document.getElementsByClassName("five-day-humidity");
 
 // Search button
 var searchBtn = document.getElementById("search");
@@ -14,8 +25,11 @@ var searchBtn = document.getElementById("search");
 // Current date
 var currentDate = moment().format("l");
 
+// Fetches weather forecast when search button is clicked
 searchBtn.addEventListener("click", async function (event) {
-  // user inputed city
+  event.preventDefault();
+
+  // User inputed city
   var city = document.getElementById("search-input").value;
 
   // request URL for current weather
@@ -25,11 +39,9 @@ searchBtn.addEventListener("click", async function (event) {
     "&appid=" +
     APIKey +
     "&units=imperial";
-  console.log(requestUrl);
-  console.log(city);
 
-  event.preventDefault();
   console.log(city);
+  console.log(requestUrl);
 
   // Displays current weather
   fetch(requestUrl)
@@ -38,20 +50,22 @@ searchBtn.addEventListener("click", async function (event) {
     })
     .then(function (data) {
       console.log(data);
-      console.log(requestUrl);
+
+      // Displays city name and current date
       currentCity.textContent = data.name + " (" + currentDate + ")";
 
-      // Adds icon to current daily forecast
+      // Displays daily forecast elements
       currentIcon.setAttribute(
         "src",
         " http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
       );
       currentTemp.textContent = "Temp: " + data.main.temp + "°F";
       currentWind.textContent = "Wind: " + data.wind.speed + " MPH";
-      currentHumidity.textContent = "Humidity: " + data.main.humidity + " %";
+      currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
     })
     .catch(function (error) {
       alert("Please enter a valid city name");
+      currentCity.textContent = "Daily Forecast";
     });
 
   // Five day forecast URL
@@ -64,24 +78,7 @@ searchBtn.addEventListener("click", async function (event) {
 
   console.log(fiveDayForecastUrl);
 
-  // var fiveDayForecast = document.getElementById("five-day-forecast");
-
-  //Five day icon information
-  // var fiveDayIcon = document.getElementsByClassName("five-day-icon");
-
-  var fiveDayIconDisplay = document.getElementsByClassName(
-    "five-day-icon-display"
-  );
-
-  // Five day temp information
-  var fiveDayTemp = document.getElementsByClassName("five-day-temp");
-
-  // Five day wind information
-  var fiveDayWind = document.getElementsByClassName("five-day-wind");
-
-  // Five day humidity information
-  var fiveDayHumidity = document.getElementsByClassName("five-day-humidity");
-
+  // Displays five day weather forecast
   fetch(fiveDayForecastUrl)
     .then(function (response) {
       return response.json();
@@ -90,21 +87,14 @@ searchBtn.addEventListener("click", async function (event) {
       console.log(data);
 
       // Displays five day forecast data
-      // j = 6 because this starts at the next day data. when [0], sometimes it stays on the previous/current day
+      // j = 6 because this diplays data beginning at the next day
       for (var i = 0, j = 6; i < 5, j < data.list.length; i++, j += 8) {
-        console.log(data.list[j].dt_txt);
-        console.log(fiveDayTemp[i]);
-
-        // Redo this so that it sets the attribute src = "website source", and grabs icon for j
-
         fiveDayIconDisplay[i].setAttribute(
           "src",
           "http://openweathermap.org/img/wn/" +
             data.list[j].weather[0].icon +
             ".png"
         );
-
-        // fiveDayIcon[i].textContent = data.list[j].weather[0].icon;
         fiveDayTemp[i].textContent = "Temp: " + data.list[j].main.temp + "°F";
         fiveDayWind[i].textContent =
           "Wind: " + data.list[j].wind.speed + " MPH";
@@ -115,17 +105,20 @@ searchBtn.addEventListener("click", async function (event) {
       // Search history section. Creates button for every search made
       var searchHistoryDiv = document.getElementById("search-history");
 
+      // Creates a button for each city searched
       var searchHistoryBtn = document.createElement("button");
       searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
 
+      // Displays butotn for each city searched and saves to local storage
       searchHistoryDiv.append(searchHistoryBtn);
       localStorage.setItem(city, city);
       searchHistoryBtn.textContent = localStorage.getItem(city);
 
+      // When button for previous searches are clicked, then it goes to that data
       searchHistoryBtn.addEventListener("click", function (event) {
         event.preventDefault();
-
         alert("this city search has been clicked");
+        // return;
       });
     });
 });
@@ -139,6 +132,5 @@ for (var i = 0; i < 5; i++) {
     .format("l");
 }
 
-// TODO: display icons - if statement? create elements?
 // TODO: link saved searches to corresponding data
 // QUESTIONS: why doesnt city & requestURL variables work as global variables???
