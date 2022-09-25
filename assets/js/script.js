@@ -72,6 +72,7 @@ function fetchWeather() {
     .catch(function (error) {
       alert("Please enter a valid city name");
       currentCity.textContent = "Daily Forecast";
+      return;
     });
 
   // Five-day forecast URL
@@ -114,7 +115,7 @@ function searchHistory() {
 
   // Creates a button for each city searched
   var searchHistoryBtn = document.createElement("button");
-  searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
+  searchHistoryBtn.setAttribute("class", "searchHistory");
 
   // Displays button for each city searched and saves to local storage
   searchHistoryDiv.append(searchHistoryBtn);

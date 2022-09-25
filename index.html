@@ -4,44 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
   <body>
     <header>Weather Dashboard</header>
+
     <!-- Code container -->
-    <div
-      class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh" id="container2"
-    >
+    <div id="container">
 
     <!-- Search bar section -->
-      <div class="col-12 col-md-3 bg-light p-3">
+      <div class="search-section">
         <h2>Search for a City</h2>
         <form id="search-form">
           <input
             id="search-input"
-            class="form-input w-100"
             type="text"
             placeholder="City name"
           />
-          <button id="search" class="btn btn-info btn-block">Search</button>
+          <button id="search">Search</button>
         </form>
+
         <hr> 
 
-        <!-- Where search history buttons will appear -->
-        <div id="search-history">
-        </div>
-       
+        <!-- Section for where search history buttons will appear -->
+        <div id="search-history"></div>
       </div>
 
       <!-- Current Forecast -->
-      <div class="col-12 col-md-9 p-3 text-light">
-        <div id="today-forecast">
+      <div>
+        <div id="daily-forecast">
           <h2 id="current-city">Daily Forecast</h2>
           <img id="current-icon">
           <p id="current-temp">Temp:</p>
@@ -49,75 +41,61 @@
           <p id="current-humidity">Humidity:</p>
         </div>
       
-        <!-- Five Day Forecast -->
-        <div class="col-12 col-md-9 p-3 text-light" id="forecast-info">
+        <!-- Five-Day Forecast -->
+        <div id="forecast-info">
           <h2>5-Day Forecast</h2>
 
-
-        <div id="five-day-forecast">
-
-          <div class="card" id="card1">
-            <div class="card-body">
-              <h3 class="card-title" id="day1">Day 1</h3>
-              <img class="five-day-icon-display">
-              <p class="five-day-icon"></p>
-              <p class="five-day-temp">Temp:</p>
-              <p class="five-day-wind">Wind:</p>
-              <p class="five-day-humidity">Humidity:</p>
+          <!-- Day 1 -->
+          <div id="five-day-forecast">
+            <div class="card">      
+                <h3 class="card-title"></h3>
+                <img class="five-day-icon-display">
+                <p class="five-day-temp">Temp:</p>
+                <p class="five-day-wind">Wind:</p>
+                <p class="five-day-humidity">Humidity:</p>
             </div>
-          </div>
-
-    
-
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title" id="day2">Day 2</h3>
-              <img class="five-day-icon-display">
-              <p class="five-day-icon"></p>
-              <p class="five-day-temp">Temp:</p>
-              <p class="five-day-wind">Wind:</p>
-              <p class="five-day-humidity">Humidity:</p>
-            </div>
-          </div>
   
-
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title" id="day3">Day 3</h3>
+            <!-- Day 2 -->
+            <div class="card">
+              <h3 class="card-title"></h3>
               <img class="five-day-icon-display">
-              <p class="five-day-icon"></p>
               <p class="five-day-temp">Temp:</p>
               <p class="five-day-wind">Wind:</p>
               <p class="five-day-humidity">Humidity:</p>
             </div>
-          </div>
-      
 
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title" id="day4">Day 4</h3>
+            <!-- Day 3 -->
+            <div class="card">
+              <h3 class="card-title"></h3>
               <img class="five-day-icon-display">
-              <p class="five-day-icon"></p>
               <p class="five-day-temp">Temp:</p>
               <p class="five-day-wind">Wind:</p>
               <p class="five-day-humidity">Humidity:</p>
             </div>
-          </div>
+
+            <!-- Day 4 -->
+            <div class="card">
+              <h3 class="card-title"></h3>
+              <img class="five-day-icon-display">
+              <p class="five-day-temp">Temp:</p>
+              <p class="five-day-wind">Wind:</p>
+              <p class="five-day-humidity">Humidity:</p>
+            </div>
        
-
-          <div class="card" id="card5">
-            <div class="card-body">
-              <h3 class="card-title" id="day5">Day 5</h3>
+            <!-- Day 5 -->
+            <div class="card">
+              <h3 class="card-title"></h3>
               <img class="five-day-icon-display">
-              <p class="five-day-icon"></p>
               <p class="five-day-temp">Temp:</p>
               <p class="five-day-wind">Wind:</p>
               <p class="five-day-humidity">Humidity:</p>
             </div>
-          </div>
-          </div>
+        </div>  
+      </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
+
   </body>
 </html>
