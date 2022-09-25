@@ -1,7 +1,12 @@
 // API key for Weather API
 var APIKey = "c760641df731ec398ea17ddbcb746b34";
 
+// Intialize city variable
 var city = "";
+
+// Search button
+var searchBtn = document.getElementById("search");
+
 // Current weather forecast elements
 var currentCity = document.getElementById("current-city");
 var currentIcon = document.getElementById("current-icon");
@@ -10,18 +15,10 @@ var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
 
 // Five-day weather forecast elements
-var fiveDayIconDisplay = document.getElementsByClassName(
-  "five-day-icon-display"
-);
-var fiveDayIconDisplay = document.getElementsByClassName(
-  "five-day-icon-display"
-);
+var fiveDayIcon = document.getElementsByClassName("five-day-icon-display");
 var fiveDayTemp = document.getElementsByClassName("five-day-temp");
 var fiveDayWind = document.getElementsByClassName("five-day-wind");
 var fiveDayHumidity = document.getElementsByClassName("five-day-humidity");
-
-// Search button
-var searchBtn = document.getElementById("search");
 
 // Current date
 var currentDate = moment().format("l");
@@ -29,13 +26,18 @@ var currentDate = moment().format("l");
 // Displays city name and current date
 currentCity.textContent = "Daily Forecast " + "(" + currentDate + ")";
 
-// Fetches weather forecast when search button is clicked
+// Displays weather forecast when search button is clicked
 searchBtn.addEventListener("click", async function (event) {
   event.preventDefault();
 
   // User inputed city
   city = document.getElementById("search-input").value;
 
+  fetchWeather();
+  searchHistory();
+});
+
+function fetchWeather() {
   // request URL for current weather
   var requestUrl =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -72,7 +74,7 @@ searchBtn.addEventListener("click", async function (event) {
       currentCity.textContent = "Daily Forecast";
     });
 
-  // Five day forecast URL
+  // Five-day forecast URL
   var fiveDayForecastUrl =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
@@ -82,18 +84,16 @@ searchBtn.addEventListener("click", async function (event) {
 
   console.log(fiveDayForecastUrl);
 
-  // Displays five day weather forecast
+  // Displays five-day weather forecast
   fetch(fiveDayForecastUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-
       // Displays five-day forecast data
-      // j = 6 because this diplays data beginning at the next day
+      // j = 6 since this diplays data beginning at the next day
       for (var i = 0, j = 6; i < 5, j < data.list.length; i++, j += 8) {
-        fiveDayIconDisplay[i].setAttribute(
+        fiveDayIcon[i].setAttribute(
           "src",
           "http://openweathermap.org/img/wn/" +
             data.list[j].weather[0].icon +
@@ -106,34 +106,31 @@ searchBtn.addEventListener("click", async function (event) {
           "Humidity: " + data.list[j].main.humidity + "%";
       }
     });
+}
 
-  searchHistory();
-});
-
-// Creates button for search history
+// Creates a search history where you can go to results of previous searches
 function searchHistory() {
-  // Search history section. Creates button for every search made
   var searchHistoryDiv = document.getElementById("search-history");
 
   // Creates a button for each city searched
   var searchHistoryBtn = document.createElement("button");
   searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
 
-  // Displays butotn for each city searched and saves to local storage
+  // Displays button for each city searched and saves to local storage
   searchHistoryDiv.append(searchHistoryBtn);
   localStorage.setItem(city, city);
   searchHistoryBtn.textContent = localStorage.getItem(city);
 
-  // TODO:
-  // When button for previous searches are clicked, then it goes to that data
+  // When button for previous searches are clicked, then it goes to the results of that search
   searchHistoryBtn.addEventListener("click", function (event) {
     event.preventDefault();
-
-    alert("this city search has been clicked");
+    city = searchHistoryBtn.textContent;
+    fetchWeather();
+    console.log(city);
   });
 }
 
-// Displays dates for the five day forecast
+// Displays dates for the five-day forecast
 for (var i = 0; i < 5; i++) {
   var futureDates = document.getElementsByClassName("card-title");
 
@@ -141,6 +138,3 @@ for (var i = 0; i < 5; i++) {
     .add(1 + i, "days")
     .format("l");
 }
-
-// TODO: Make search input begin with capital letter
-// TODO: Link search history buttons to it's search
