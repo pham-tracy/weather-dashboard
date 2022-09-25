@@ -119,8 +119,8 @@ function searchHistory() {
 
   // Displays button for each city searched and saves to local storage
   searchHistoryDiv.append(searchHistoryBtn);
-  localStorage.setItem(city, city);
-  searchHistoryBtn.textContent = localStorage.getItem(city);
+  localStorage.setItem(city, JSON.stringify(city));
+  searchHistoryBtn.textContent = JSON.parse(localStorage.getItem(city));
 
   // When button for previous searches are clicked, then it goes to the results of that search
   searchHistoryBtn.addEventListener("click", function (event) {

@@ -14,7 +14,7 @@ N/A
 
 Visit the project website here: https://pham-tracy.github.io/weather-dashboard/
 
-![weather-dashboard](/assets/images/weather-dashboard-screenshot.png);
+![weather-dashboard](/assets/images/weather-dashboard.png)
 
 ## Credits
 
