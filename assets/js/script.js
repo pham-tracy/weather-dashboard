@@ -1,6 +1,7 @@
 // API key for Weather API
 var APIKey = "c760641df731ec398ea17ddbcb746b34";
 
+var city = "";
 // Current weather forecast elements
 var currentCity = document.getElementById("current-city");
 var currentIcon = document.getElementById("current-icon");
@@ -25,12 +26,15 @@ var searchBtn = document.getElementById("search");
 // Current date
 var currentDate = moment().format("l");
 
+// Displays city name and current date
+currentCity.textContent = "Daily Forecast " + "(" + currentDate + ")";
+
 // Fetches weather forecast when search button is clicked
 searchBtn.addEventListener("click", async function (event) {
   event.preventDefault();
 
   // User inputed city
-  var city = document.getElementById("search-input").value;
+  city = document.getElementById("search-input").value;
 
   // request URL for current weather
   var requestUrl =
@@ -86,7 +90,7 @@ searchBtn.addEventListener("click", async function (event) {
     .then(function (data) {
       console.log(data);
 
-      // Displays five day forecast data
+      // Displays five-day forecast data
       // j = 6 because this diplays data beginning at the next day
       for (var i = 0, j = 6; i < 5, j < data.list.length; i++, j += 8) {
         fiveDayIconDisplay[i].setAttribute(
@@ -101,27 +105,32 @@ searchBtn.addEventListener("click", async function (event) {
         fiveDayHumidity[i].textContent =
           "Humidity: " + data.list[j].main.humidity + "%";
       }
-
-      // Search history section. Creates button for every search made
-      var searchHistoryDiv = document.getElementById("search-history");
-
-      // Creates a button for each city searched
-      var searchHistoryBtn = document.createElement("button");
-      searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
-
-      // Displays butotn for each city searched and saves to local storage
-      searchHistoryDiv.append(searchHistoryBtn);
-      localStorage.setItem(city, city);
-      searchHistoryBtn.textContent = localStorage.getItem(city);
-
-      // When button for previous searches are clicked, then it goes to that data
-      searchHistoryBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        alert("this city search has been clicked");
-        // return;
-      });
     });
+  searchHistory();
 });
+
+// Creates button for search history
+function searchHistory() {
+  // Search history section. Creates button for every search made
+  var searchHistoryDiv = document.getElementById("search-history");
+
+  // Creates a button for each city searched
+  var searchHistoryBtn = document.createElement("button");
+  searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
+
+  // Displays butotn for each city searched and saves to local storage
+  searchHistoryDiv.append(searchHistoryBtn);
+  localStorage.setItem(city, city);
+  searchHistoryBtn.textContent = localStorage.getItem(city);
+
+  // When button for previous searches are clicked, then it goes to that data
+  searchHistoryBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    alert("this city search has been clicked");
+  });
+}
+
+// TODO: Add event listener so that button links to saved searches to corresponding weather data
 
 // Displays dates for the five day forecast
 for (var i = 0; i < 5; i++) {
@@ -132,5 +141,5 @@ for (var i = 0; i < 5; i++) {
     .format("l");
 }
 
-// TODO: link saved searches to corresponding data
-// QUESTIONS: why doesnt city & requestURL variables work as global variables???
+// TODO: Make search input begin with capital letter
+// TODO: Link search history buttons to it's search

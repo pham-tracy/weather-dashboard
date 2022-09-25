@@ -29,20 +29,6 @@ body {
     border-radius: 0.3rem;
   }
 
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    margin: 0 0 0.5rem;
-    line-height: 1.25;
-  }
-  
-
   header {
     background: rgb(63,94,251);
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(70,188,252,1) 100%);
@@ -50,33 +36,49 @@ body {
     padding: 40px;
     text-align: center;
     font-size: 30px;
-    width:100vh;
+    width:100%;
   }
 
 #today-forecast {
     border: 2px white solid;
+    width: 99vh;
+    background-color:  rgb(199, 227, 254);
+    margin-left:9px;
+
 }
 
-#five-day-forecast {
+#five-day-forecast, #current-{
 
     display: flex;
+    /*
     flex-direction: row;
     flex-wrap: nowrap;
-    width:89vh;
-    /* background-color: pink; */
-    justify-content: space-between;
+    */
+    width:98vh;
+    justify-content: space-around;
 /* why isnt this working. no space between card elements */
+
 }
 
 .card {
     padding: 10px;
-    margin: 6px;
-    width: 40rem;
+    margin: 5px;
+    width: 50%;
     border: 1px solid #1a1a1a;
-    background-color: navy;
+    background-color: rgb(68, 146, 219);
     color:white;
+    text-align: center;
 
 }
+
+#card1 {
+  margin-left:0px;
+}
+
+#card5 {
+  margin-left: 0
+}
+
 
 /* .card .card-title {
     padding: 0.375rem;
