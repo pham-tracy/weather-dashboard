@@ -99,7 +99,15 @@ h2 {
   margin-top: 12px;
   padding: 15px;
   border-radius: 10px;
+
 }
+
+/* Makes it so that the current city and its weather icon are displayed on the same line  */
+#current-city {
+  display: inline;
+  vertical-align:top;
+}
+
 
 /* Container for five-day forecast */
 #forecast-info {
@@ -112,7 +120,6 @@ h2 {
   display: flex;
   width: 99vh;
 }
-
 
 /* Styling for five-day weather forecast cards */
 .card {
