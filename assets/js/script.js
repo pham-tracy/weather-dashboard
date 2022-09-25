@@ -114,19 +114,20 @@ searchBtn.addEventListener("click", async function (event) {
 
       // Search history section. Creates button for every search made
       var searchHistoryDiv = document.getElementById("search-history");
+
+      var searchHistoryBtn = document.createElement("button");
+      searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
+
       searchHistoryDiv.append(searchHistoryBtn);
       localStorage.setItem(city, city);
       searchHistoryBtn.textContent = localStorage.getItem(city);
+
+      searchHistoryBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        alert("this city search has been clicked");
+      });
     });
-});
-
-var searchHistoryBtn = document.createElement("button");
-searchHistoryBtn.setAttribute("class", "btn btn-block searchHistory");
-
-searchHistoryBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  alert("this city search has been clicked");
 });
 
 // Displays dates for the five day forecast

@@ -50,6 +50,7 @@ body {
     padding: 40px;
     text-align: center;
     font-size: 30px;
+    width:100vh;
   }
 
 #today-forecast {
@@ -61,15 +62,15 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    width:100vh;
-    background-color: pink;
-    /* justify-content: space-between; */
+    width:89vh;
+    /* background-color: pink; */
+    justify-content: space-between;
 /* why isnt this working. no space between card elements */
 }
 
 .card {
     padding: 10px;
-    margin: 20px;
+    margin: 6px;
     width: 40rem;
     border: 1px solid #1a1a1a;
     background-color: navy;
@@ -88,9 +89,10 @@ body {
   } */
 /* Still large margin on right side making cards squished */
 #forecast-info {
-  border: 2px black solid;
+  /* border: 2px black solid; */
   padding: 10px;
-  background-color: yellow;
+  /* background-color: yellow; */
+  width:90vh;
 
 }
 
@@ -137,13 +139,34 @@ body {
     margin-right: auto;
   }
    */
-
-   .searchHistory {
+.searchHistory {
     margin: 15px 0px;
-   }
-   
+   } 
 
    #today-forecast {
-    border: 2px black solid;
-    padding: 10px;
+    border: 1px gray solid;
+    padding: 15px;
    }
+
+   /* Makes serach box flex to the left */
+   .flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+
+  
+
+
+
+  .p-3 {
+    padding: 1rem;
+  }
+
+  /* #container2 {
+    width:100%;
+  margin-right:0px;
+  } */
+
+  
