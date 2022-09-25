@@ -106,6 +106,7 @@ searchBtn.addEventListener("click", async function (event) {
           "Humidity: " + data.list[j].main.humidity + "%";
       }
     });
+
   searchHistory();
 });
 
@@ -123,14 +124,14 @@ function searchHistory() {
   localStorage.setItem(city, city);
   searchHistoryBtn.textContent = localStorage.getItem(city);
 
+  // TODO:
   // When button for previous searches are clicked, then it goes to that data
   searchHistoryBtn.addEventListener("click", function (event) {
     event.preventDefault();
+
     alert("this city search has been clicked");
   });
 }
-
-// TODO: Add event listener so that button links to saved searches to corresponding weather data
 
 // Displays dates for the five day forecast
 for (var i = 0; i < 5; i++) {
