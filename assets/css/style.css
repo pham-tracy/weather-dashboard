@@ -13,9 +13,9 @@ body {
 }
 
 p {
-  font-size: 20px;
+  font-size: 18px;
   margin: 10px;
-  line-height: 2;
+  line-height: 1.8;
 }
 
 header {
@@ -28,8 +28,12 @@ header {
   color: white;
   padding: 40px;
   text-align: center;
-  font-size: 35px;
+  font-size: 26px;
   width: 100%;
+  height: 50px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Styling for search button */
@@ -50,6 +54,11 @@ button:hover {
   background-color: #47aee1;
 }
 
+h2 {
+  font-size: 24px;
+}
+
+
 /* Makes code container flex & moves search box to the left */
 #container {
   display: flex;
@@ -57,6 +66,11 @@ button:hover {
   flex-wrap: wrap;
 }
 
+#container2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 /* Padding for search section */
 .search-section {
   padding: 25px;
@@ -98,6 +112,7 @@ button:hover {
   display: flex;
   width: 99vh;
 }
+
 
 /* Styling for five-day weather forecast cards */
 .card {
